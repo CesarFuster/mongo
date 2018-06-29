@@ -1,32 +1,40 @@
 <%= form_for(post) do |f| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <ul>
+          <% post.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+    </div>
+  <% end %>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
+  <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+  </div>
 
-  <div class="field">
-    <%= f.label :body %>
-    <%= f.text_field :body %>
-  </div>
+  <div class="field">
+      <%= f.label :body %>
+      <%= f.text_field :body %>
+  </div>
 
-  <div class="field">
-    <%= f.label :online %>
-    <%= f.check_box :online %>
-  </div>
+  <div class="field">
+      <%= f.label :online %>
+      <%= f.check_box :online %>
+  </div>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.fields_for :author do |author| %>
+    <p>Author</p>
+    <div class="field">
+        <%= author.label :name %>
+        <%= author.text_field :name %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+      <%= f.submit %>
+  </div>
 <% end %>
